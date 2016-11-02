@@ -15,17 +15,13 @@ import org.jsoup.select.Elements;
 import com.ibaseit.scraping.ResponseHandler;
 import com.ibaseit.scraping.dto.VimasHtmlData;
 
-
 public class VIMASExcelHandler implements ResponseHandler {
 
 	@Override
 	public String handleResponse(HttpResponse response,
 			Map<String, Object> currentClientInfo) throws IOException {
 
-		// return "";
 		String pageCount = "";
-		List<String> urls = new ArrayList<String>();
-		// TODO Auto-generated method stub
 		String page = responseString(response).replaceAll("&nbsp;", "");
 
 		Elements element = Jsoup.parse(page).select("span[id=\"PagesList\"]");
