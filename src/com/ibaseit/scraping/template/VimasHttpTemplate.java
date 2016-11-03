@@ -64,7 +64,7 @@ public class VimasHttpTemplate extends HttpTemplate {
 				System.out.println("vimasHtmlData from VIMAS ="
 						+ currentClientInfo.get("vimasHtmlData"));
 
-			} while (templateName.equalsIgnoreCase("Charge Back Details") && (currentClientInfo.get("SelectedPageCtrl") != null && pageSize < Integer
+			} while (httpStep.getName().equalsIgnoreCase("Charge Back Details") && (currentClientInfo.get("SelectedPageCtrl") != null && pageSize < Integer
 							.parseInt(currentClientInfo.get("SelectedPageCtrl").toString())));
 		}
 
