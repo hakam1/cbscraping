@@ -60,7 +60,7 @@ public class VIMASExcelHandler implements ResponseHandler {
 
 		return null;
 	}
-
+	
 	public String responseString(HttpResponse response) throws IOException {
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response
 				.getEntity().getContent()));
@@ -72,12 +72,5 @@ public class VIMASExcelHandler implements ResponseHandler {
 		return result.toString();
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

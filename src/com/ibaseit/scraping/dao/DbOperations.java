@@ -7,4 +7,6 @@ public interface DbOperations {
 
 	public void insert(List<LogSheetData> logSheetData) throws SQLException;
 
+	public void insertMongo(List<LogSheetData> logSheetData) throws SQLException;
+
 }
