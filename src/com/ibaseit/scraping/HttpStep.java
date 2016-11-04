@@ -135,7 +135,7 @@ public class HttpStep {
 		} else if ("POST".equalsIgnoreCase(this.getMethod())) {
 
 			formParams = new FormData().getFormParams(page, this, currentClientInfo);
-			HttpPost post = new HttpPost(this.getUrl());
+			HttpPost post = new HttpPost(this.getUrl().replace("?0",(currentClientInfo.get("strRqstID")!=null)? currentClientInfo.get("strRqstID").toString():""));
 			post.setEntity(new UrlEncodedFormEntity(formParams));
 			HttpResponse response = client.execute(post, httpContext);
 			page = new ResProcHandler().handleResponse(response,
