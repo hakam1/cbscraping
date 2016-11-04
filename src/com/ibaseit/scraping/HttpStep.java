@@ -99,7 +99,19 @@ public class HttpStep {
 
 		if ("GET".equalsIgnoreCase(this.getMethod())) {
 
-			HttpGet request = new HttpGet(this.getUrl());
+			formParams = new FormData().getFormParams(page, this, currentClientInfo);
+			List<NameValuePair> paramList = formParams;
+			StringBuilder sb = new StringBuilder();
+
+			for (NameValuePair param : paramList) {
+				sb.append(param.getName() + "=" + param.getValue() + "&");
+			}
+			String urlParam = sb.toString();
+			HttpGet request = new HttpGet(this.getUrl()
+					+ ((urlParam != null && urlParam.length() > 0) ? urlParam.substring(
+							0, urlParam.length() - 1) : ""));
+
+			// HttpGet request = new HttpGet(this.getUrl());
 			HttpResponse response = client.execute(request, httpContext);
 			page = new ResProcHandler().handleResponse(response,
 					this.getResProcessHandler(), currentClientInfo);
@@ -141,10 +153,6 @@ public class HttpStep {
 
 	public String getUrl() {
 		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public String getMethod() {

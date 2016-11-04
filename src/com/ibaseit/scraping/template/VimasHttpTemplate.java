@@ -61,11 +61,6 @@ public class VimasHttpTemplate extends HttpTemplate {
 				do {
 					httpStep.execute(currentClientInfo, httpContext);
 					pageSize++;
-					System.out.println("pageSize =" + pageSize);
-					System.out.println("pageSize from VIMAS ="
-							+ currentClientInfo.get("SelectedPageCtrl"));
-					System.out.println("vimasHtmlData from VIMAS ="
-							+ currentClientInfo.get("vimasHtmlData"));
 
 				} while (httpStep.getName().equalsIgnoreCase("Charge Back Details")
 						&& (currentClientInfo.get("SelectedPageCtrl") != null && pageSize < Integer
@@ -73,19 +68,16 @@ public class VimasHttpTemplate extends HttpTemplate {
 			} else if (httpStep.getName().equalsIgnoreCase(
 					"Charge Back Record Details")) {
 
-				String url = httpStep.getUrl();
-
 				List<VimasHtmlData> htmlDataList = (currentClientInfo
 						.get("vimasHtmlData") != null) ? (List<VimasHtmlData>) currentClientInfo
 						.get("vimasHtmlData") : new ArrayList<VimasHtmlData>();
 
 				List<VimasHtmlData> htmlFinalDataList = new ArrayList<VimasHtmlData>();
 				for (VimasHtmlData vimasData : htmlDataList) {
-					String recUrl = url;
-					String IntmidUrl = recUrl.replace("$2", vimasData.getIntmid());
-					String finalUrl = IntmidUrl.replace("$1", vimasData.getCaseNum());
-					
-					httpStep.setUrl(finalUrl);
+
+					currentClientInfo.put("CaseNum", vimasData.getCaseNum());
+					currentClientInfo.put("Intmid", vimasData.getIntmid());
+
 					httpStep.execute(currentClientInfo, httpContext);
 					vimasData
 							.setCardType(currentClientInfo.get("cardType") != null ? currentClientInfo

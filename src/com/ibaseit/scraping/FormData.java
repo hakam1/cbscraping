@@ -20,6 +20,7 @@ public class FormData {
 		List<NameValuePair> paramList = new ArrayList<NameValuePair>();
 		Map<String, String> reqParam = httpStep.getReqParam();
 		if (httpStep.getName().startsWith("Login")) {
+			if(htmlResponse!=null){
 			for (Element element : Jsoup.parse(htmlResponse).getElementsByTag("form")) {
 				for (Element inputElement : element.getElementsByTag("input")) {
 					String key = inputElement.attr("name");
@@ -29,6 +30,7 @@ public class FormData {
 								.toString();
 					paramList.add(new BasicNameValuePair(key, value));
 				}
+			}
 			}
 		} else {
 			for (Map.Entry<String, String> param : reqParam.entrySet()) {

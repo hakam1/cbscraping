@@ -42,13 +42,10 @@ public class HttpTemplate {
 		return templateName;
 	}
 
-	public void setTemplateName(String templateName) {
-		this.templateName = templateName;
-	}
-
 	public void execute(Map<String, Object> currentClientInfo) throws Exception {
 		HttpContext httpContext = new BasicHttpContext();
-		httpContext.setAttribute(HttpClientContext.COOKIE_STORE,new BasicCookieStore());
+		httpContext.setAttribute(HttpClientContext.COOKIE_STORE,
+				new BasicCookieStore());
 
 		for (HttpStep httpStep : allSteps) {
 			httpStep.execute(currentClientInfo, httpContext);
